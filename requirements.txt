@@ -1,0 +1,9 @@
+# Kanchipuram Bot Dependencies
+# Python 3.11 REQUIRED (Python 3.13 breaks discord.py due to removed audioop module)
+# Install with: pip install -r requirements.txt
+
+discord.py==2.4.0
+gspread==6.1.0
+google-auth-oauthlib==1.2.0
+google-auth==2.27.0
+python-dotenv==1.0.0

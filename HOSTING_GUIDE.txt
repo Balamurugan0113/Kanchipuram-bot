@@ -1,0 +1,83 @@
+Kanchipuram Bot - Free 24/7 Hosting Guide
+
+Recommended Free Hosting: Koyeb
+------------------------------
+1. Create a free Koyeb account: https://app.koyeb.com/auth/signup
+2. Connect your GitHub account.
+3. Create a new service and select your repository.
+4. Configure:
+   - Runtime: Python 3.11
+   - Build command: pip install -r requirements.txt
+   - Run command: python bot.py
+   - HTTP port: 8000
+5. Add environment variables in Koyeb:
+   - BOT_TOKEN
+   - GOOGLE_CREDS (full JSON content if not using credentials.json)
+   - SHEET_NAME
+   - MANAGER_ROLE
+   - MEMBER_ROLE
+6. Deploy and wait 2-3 minutes.
+7. Verify the bot is online in Discord and responds to `/`.
+
+Keep it alive 24/7:
+-------------------
+Use a free uptime monitor like UptimeRobot:
+1. Sign up at https://uptimerobot.com
+2. Create an HTTP monitor.
+3. Use the bot URL + port 8000:
+   http://<your-service-hostname>:8000
+4. Set the check interval to 5 minutes.
+
+Alternative Free Hosting Options:
+----------------------------------
+Railway
+   - Good free credits for small projects
+   - Deploy from GitHub
+   - Add environment variables in Railway settings
+   - Use the same build/start commands
+
+Render
+   - Free tier available
+   - Service may sleep after 15 minutes of inactivity
+   - Use UptimeRobot to keep it awake
+   - Good alternative when Koyeb or Railway are not available
+
+Render Deployment Steps:
+   1. Create a free account at https://render.com
+   2. Click "New +" → "Web Service"
+   3. Connect your GitHub repository
+   4. Select the Kanchipuram Bot repo
+   5. Configure:
+      - Environment: Python 3.11
+      - Build Command: pip install -r requirements.txt
+      - Start Command: python bot.py
+      - HTTP Port: 8000
+   6. Add secrets in Render "Environment" settings:
+      - BOT_TOKEN
+      - GOOGLE_CREDS (full JSON string if not using credentials.json)
+      - SHEET_NAME
+      - MANAGER_ROLE
+      - MEMBER_ROLE
+   7. Deploy and wait for the service to become live.
+   8. Use UptimeRobot with the service URL + :8000 to keep it awake.
+
+Replit
+   - Easiest to use
+   - Free tier may sleep
+   - Upload repo files and run bot.py
+
+Important Notes:
+----------------
+- Do not commit `.env` or `credentials.json` to GitHub.
+- Use `.env` locally and environment variables in hosting.
+- The bot requires Python 3.11 or 3.12; Python 3.13 is not supported.
+- The bot includes a health check HTTP server on port 8000 for uptime monitoring.
+- Share your Google Sheet with the service account email before running.
+
+Local Test Before Deploy:
+-------------------------
+1. Create `.env` with your credentials.
+2. Run `py -3.11 bot.py` or use `run.bat` on Windows.
+3. Confirm the bot logs in successfully and Discord commands appear.
+
+That is the full free 24/7 hosting guide for the Kanchipuram Bot.

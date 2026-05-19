@@ -1,0 +1,66 @@
+Kanchipuram Bot - Code Changes Summary
+
+Overview:
+The bot was refactored from a single monolithic script into a modular Discord bot with improved data structure, Google Sheets persistence, storage management, and free hosting support.
+
+Major Code Changes:
+1. Split the bot into two main files:
+   - bot.py: Discord command logic, interaction handling, and startup.
+   - database.py: Google Sheets connection, caching, storage, logs, and stats management.
+
+2. Added environment-based configuration:
+   - Used .env variables for BOT_TOKEN, SHEET_NAME, roles, and Google credentials.
+   - Added .env.template with placeholders instead of secrets.
+
+3. Improved Google Sheets integration:
+   - Added automatic worksheet creation: Logs, Storage, Stats, Data.
+   - Implemented persistent JSON data storage in the Data sheet.
+   - Added structured log entries with timestamp, category, item, amount, screenshot, and user ID.
+   - Added storage summary sheet updates for easier manual viewing.
+
+4. Added new bot command structure:
+   - /log_grind
+   - /log_craft
+   - /log_sale
+   - /storage_add
+   - /storage_remove
+   - /storage_view
+   - /stats
+   - /user_stats
+   - /admin_clear_logs
+   - /admin_reset_storage
+   - /admin_clear_user
+
+5. Added a health check server for free hosting uptime monitoring:
+   - Created a lightweight HTTP server on port 8000.
+   - Useful for services like Koyeb, Railway, Render, and UptimeRobot.
+
+6. Added support files and deployment helpers:
+   - Dockerfile
+   - docker-compose.yml
+   - run.bat
+   - run.sh
+   - setup.bat
+   - setup.sh
+
+7. Added documentation and guides:
+   - README.md: full project documentation.
+   - HOSTING.md: free hosting guide.
+   - QUICKSTART.md: quick setup instructions.
+   - CONFIG.md: configuration reference.
+   - PROJECT_SUMMARY.md: project overview and checklist.
+   - SETUP_COMPLETE.md: setup summary.
+   - START_HERE.txt: visual overview.
+
+8. Updated requirements and compatibility notes:
+   - Added Python 3.11 compatibility warning.
+   - Ensured dependencies are documented in requirements.txt.
+
+Functional Improvements:
+- More understandable storage view and stats tracking.
+- Better role-based access control.
+- Cleaner and safer environment configuration.
+- More reliable Google Sheets data handling and backup.
+- Easier hosting and deployment for a 24/7 bot.
+
+These changes make the bot easier to run, maintain, and host online continuously.

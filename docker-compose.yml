@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  kanchipuram-bot:
+    build: .
+    container_name: kanchipuram-bot
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - GOOGLE_CREDS=${GOOGLE_CREDS}
+      - SHEET_NAME=${SHEET_NAME}
+      - MANAGER_ROLE=${MANAGER_ROLE}
+      - MEMBER_ROLE=${MEMBER_ROLE}
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./credentials.json:/app/credentials.json:ro
