@@ -26,6 +26,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 SHEET_NAME = os.getenv("SHEET_NAME", "Kanchipuram FiveM Logs")
 MANAGER_ROLE = os.getenv("MANAGER_ROLE", "Server Developers")
 MEMBER_ROLE = os.getenv("MEMBER_ROLE", "KPM Recycle")
+GUILD_ID = int(os.getenv("GUILD_ID")) if os.getenv("GUILD_ID") else None
 
 if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN not found in environment variables!")
@@ -102,15 +103,19 @@ async def on_ready():
             print(f"❌ Failed to initialize database: {e}")
             return
 
-    GUILD_ID = 1086734958783123527 
-    
-    guild = discord.Object(id=GUILD_ID) 
-    
-    try:
-        synced = await bot.tree.sync(guild=guild)
-        print(f"✅ Synced {len(synced)} guild command(s)")
-    except Exception as e:
-        print(f"❌ Sync error: {e}")
+    if GUILD_ID:
+        guild = discord.Object(id=GUILD_ID)
+        try:
+            synced = await bot.tree.sync(guild=guild)
+            print(f"✅ Synced {len(synced)} guild command(s) to guild {GUILD_ID}")
+        except Exception as e:
+            print(f"❌ Guild sync error: {e}")
+    else:
+        try:
+            synced = await bot.tree.sync()
+            print(f"✅ Synced {len(synced)} global command(s)")
+        except Exception as e:
+            print(f"❌ Global sync error: {e}")
 
     print(f"✅ Logged in as {bot.user}")
     print(f"📊 Database initialized: {SHEET_NAME}")
